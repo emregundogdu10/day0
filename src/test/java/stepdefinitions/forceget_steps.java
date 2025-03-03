@@ -3,27 +3,18 @@ package stepdefinitions;
 
 import com.github.javafaker.Faker;
 import io.cucumber.java.en.*;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.ElementsPage;
 import utilities.*;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import utilities.Driver;
 
 import java.time.Duration;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
-import static io.cucumber.core.internal.com.fasterxml.jackson.databind.type.LogicalType.DateTime;
-
-public class deneme {
+public class forceget_steps {
 
     static ElementsPage elementsPage = new ElementsPage();
     static String fakemail;
@@ -40,31 +31,31 @@ public class deneme {
         elementsPage.firstNameInput.sendKeys("emre" + Keys.ENTER);
     }
 
-    @When("kullanici soyismini girer")
+    @And("kullanici soyismini girer")
     public void kullanicisoymisinigirer() {
         ReusableMethods.bekle(2);
         elementsPage.lastNameInput.sendKeys("gundogdu" + Keys.ENTER);
     }
 
-    @When("kullanici ulke kodunu girer")
+    @And("kullanici ulke kodunu girer")
     public void kullaniciulkekodunugirer() {
         ReusableMethods.bekle(2);
         elementsPage.countryDropdown.sendKeys("+90" + Keys.ENTER);
     }
 
-    @When("kullanici telefon numarasi girer")
+    @And ("kullanici telefon numarasi girer")
     public void kullanicitelefonnumarasigirer() {
         ReusableMethods.bekle(2);
         elementsPage.phoneNumberInput.sendKeys("5345808027" + Keys.ENTER);
     }
 
-    @When("kullanici sirket ismini girer")
+    @And ("kullanici sirket ismini girer")
     public void kullanicisirketisminigirer() {
         ReusableMethods.bekle(2);
         elementsPage.companyNameInput.sendKeys("Forgecet" + Keys.ENTER);
     }
 
-    @When("kullanici mail girer")
+    @And ("kullanici mail girer")
     public static void kullanicimailgirer() {
         ReusableMethods.bekle(2);
         Faker faker = new Faker();
@@ -72,14 +63,14 @@ public class deneme {
         elementsPage.kullanicimail.sendKeys(fakemail);
     }
 
-    @When("kullanici gorevini girer")
+    @And ("kullanici gorevini girer")
     public void kullanicigorev() {
         ReusableMethods.bekle(2);
         elementsPage.titleField.click();
         elementsPage.ceoOption.click();
     }
 
-    @When("kullanici parola girer")
+    @And ("kullanici parolayi girer ve parolayi dogrular")
     public void kullaniciparolagirer() {
         ReusableMethods.bekle(2);
 
@@ -87,21 +78,33 @@ public class deneme {
         ReusableMethods.bekle(3);
         elementsPage.passwordInput.sendKeys("E1260e.00*");
         ReusableMethods.bekle(2);
+
+    }
+    @And("kullanici hizmet sartlari ve gizlilik politikasini okur ve onaylar")
+            public void hizmetVegizlilik() {
         elementsPage.termsCheckbox.click();
         ReusableMethods.bekle(2);
         elementsPage.ConfirmButton.click();
 
         ReusableMethods.bekle(2);
+    }
 
+    @And("kullanici  kayit ol tusuna basar ve kayit olur")
+    public void kabuletvekaydol() {
         elementsPage.sonbuton.click();
         ReusableMethods.bekle(10);
+
+    }
+
+        @And("kullanici mail dogrulamasini yapar")
+                public void maildogrulama(){
 
        // DateTimeFormatter formatter =DateTimeFormatter.ofPattern("mmHHdd");
         //String formattedDate = LocalDateTime.now().format(formatter);
         elementsPage.ilkbosluk.sendKeys("401128");
     }
 
-    @When("kullanici login icin mail girer")
+    @And("And kullanici yuklenen login sayfasında mail ve sifresini girip login olur")
     public void kullaniciloginmail(){
 
 
@@ -128,7 +131,7 @@ public class deneme {
         elementsPage.loginbuton.click();
     }
 
-    @Then("kullanici basariyla giris yaptigini dogrular")
+    @Then("kullanici anasayfaya giris yapar ve basariyla giris yaptigini dogrular")
     public void kullanici_giris_dogrular() {
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
 
